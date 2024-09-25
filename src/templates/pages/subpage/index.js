@@ -3,7 +3,7 @@ import { render } from 'preact'
 import DefaultLayout from '@layouts/default';
 import '@css/index.scss'
 
-export const title = 'Home';
+export const title = 'Subpage';
 
 // export const meta = [{
 //     name: 'description',
@@ -12,7 +12,7 @@ export const title = 'Home';
 
 const HomePage = () => <DefaultLayout>
     <div class="wrap">
-        <h1>Hello world.</h1>
+        <h1>Hello world subpage.</h1>
     </div>
 </DefaultLayout>;
 
