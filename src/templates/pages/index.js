@@ -16,4 +16,4 @@ const HomePage = () => <DefaultLayout>
     </div>
 </DefaultLayout>;
 
-render(HomePage(), document.getElementById('app'))
+render(HomePage(), document.body)

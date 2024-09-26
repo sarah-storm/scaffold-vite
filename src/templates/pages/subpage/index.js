@@ -10,10 +10,10 @@ export const title = 'Subpage';
 //     content: ''
 // }];
 
-const HomePage = () => <DefaultLayout>
+const SubPage = () => <DefaultLayout>
     <div class="wrap">
         <h1>Hello world subpage.</h1>
     </div>
 </DefaultLayout>;
 
-render(HomePage(), document.getElementById('app'))
+render(SubPage(), document.body)
