@@ -13,6 +13,7 @@ export const title = 'Home';
 const HomePage = () => <DefaultLayout>
     <div class="wrap">
         <h1>Hello world.</h1>
+        <p><a href="/subpage/">Go to subpage</a></p>
     </div>
 </DefaultLayout>;
 

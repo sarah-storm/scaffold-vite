@@ -1,12 +1,12 @@
 import { globSync } from 'glob';
 import { defineConfig } from 'vite';
-import { fileURLToPath } from 'url';
 import base from '../base';
 import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
     ...base,
+    root: path.join(process.cwd(), ""),
     build: {
         rollupOptions: {
             input: Object.fromEntries(globSync("**/src/templates/pages/**/*.html").map((file) => {
