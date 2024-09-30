@@ -22,7 +22,13 @@ export default defineConfig(({ command }) => {
 						extType = 'fonts';
 					  }
 					return `${extType}/[name][extname]`;
-				  },				  
+				  },	
+				  manualChunks: (id) => {
+					if (id.includes('appinsights') || id.includes('applicationinsights')) {
+						return 'appinsights';
+					}
+				  },
+				  chunkFileNames: 'js/[name].js',		  
 				  entryFileNames: 'js/[name].js',
 				}
 			  },
