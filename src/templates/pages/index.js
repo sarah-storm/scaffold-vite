@@ -2,6 +2,7 @@ import { render } from 'preact'
 
 import DefaultLayout from '@layouts/default';
 import '@css/index.scss'
+import '@javascript'
 
 export const title = 'Home';
 
@@ -19,6 +20,7 @@ const HomePage = () => <DefaultLayout>
             <div id="child" class="js-toggle__local child" data-toggle="js-toggle__btn">
                 testing
             </div>
+            <img src="/img/sample-1.jpg" />
         </div>
     </div>
 </DefaultLayout>;

@@ -1,6 +1,7 @@
 import preact from "@preact/preset-vite";
 import path from 'path';
 
+console.log(path.join(process.cwd(), "src/assets"));
 export default {
     resolve: {
         alias: {
@@ -11,7 +12,9 @@ export default {
             "@css": path.join(process.cwd(), "src/css"),
         },
     },
+    appType: 'mpa',
     root: path.join(process.cwd(), "src/templates/pages"),
+    publicDir: path.join(process.cwd(), "src/assets"),
     esbuild: {
       loader: 'jsx',
       include: /.*\.jsx?$/,

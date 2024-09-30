@@ -13,16 +13,6 @@ export default defineConfig(({ command }) => {
 			emptyOutDir: true,
 			rollupOptions: {
 				output: {
-				  assetFileNames: (assetInfo) => {
-					let extType = assetInfo.name.split('.').at(1);
-					if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
-					  extType = 'img';
-					}
-					if (/woff|woff2|ttf|otf/i.test(extType)) {
-						extType = 'fonts';
-					  }
-					return `${extType}/[name][extname]`;
-				  },	
 				  manualChunks: (id) => {
 					if (id.includes('appinsights') || id.includes('applicationinsights')) {
 						return 'appinsights';
