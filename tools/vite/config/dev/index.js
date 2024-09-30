@@ -1,7 +1,14 @@
 import { defineConfig } from "vite";
 import base from "../base"
+import dns from 'dns';
 
-// https://vitejs.dev/config/
+dns.setDefaultResultOrder('verbatim');
+
 export default defineConfig({
-    ...base
+    ...base,
+    server: {
+        host: 'localhost',
+        port: '8081',
+        open: true,
+    }
 });
