@@ -6,10 +6,12 @@
   "scripts": {
     "dev": "vite --config ./tools/vite/config/dev",
     "build": "vite build --config ./tools/vite/config/build",
+    "ci": "vite build --config ./tools/vite/config/integration",
     "preview": "vite preview",
     "start": "npm run dev"
   },
   "dependencies": {
+    "@stormid/toggle": "^1.0.0-alpha.19",
     "preact": "^10.23.1"
   },
   "devDependencies": {

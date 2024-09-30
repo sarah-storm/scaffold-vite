@@ -4,6 +4,7 @@ import path from 'path';
 export default {
     resolve: {
         alias: {
+            "@javascript":path.join(process.cwd(), "src/js/"),
             "@templates": path.join(process.cwd(), "src/templates/"),
             "@layouts": path.join(process.cwd(), "src/templates/layouts"),
             "@components": path.join(process.cwd(), "src/templates/components"),

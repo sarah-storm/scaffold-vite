@@ -1,0 +1,6 @@
+.child {
+    display: none
+}
+.parent.is--active .child {
+    display: static;
+}
