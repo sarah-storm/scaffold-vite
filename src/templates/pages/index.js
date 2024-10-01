@@ -1,28 +1,30 @@
-import { render } from 'preact'
+import {render} from 'preact'
+import { useEffect } from 'preact/hooks';
 
 import DefaultLayout from '@layouts/default';
+import InitJS from '@javascript/index.js';
 import '@css/index.scss'
-import '@javascript'
 
-export const title = 'Home';
+const HomePage = () => {
 
-// export const meta = [{
-//     name: 'description',
-//     content: ''
-// }];
+    useEffect(() => {
+        InitJS();
+    });
 
-const HomePage = () => <DefaultLayout>
-    <div class="wrap">
-        <h1>Hello world.</h1>
-        <p><a href="/subpage/">Go to subpage</a></p>
-        <div class="parent">
-            <button type="button" class="js-toggle__btn">Test the toggle</button>
-            <div id="child" class="js-toggle__local child" data-toggle="js-toggle__btn">
-                testing
+    return <DefaultLayout>
+        <div class="wrap">
+            <h1>Hello world.</h1>
+            <p><a href="/subpage/">Go to subpage</a></p>
+            <div class="parent">
+                <button type="button" class="js-toggle__btn">Test the toggle</button>
+                <div id="child" class="js-toggle__local child" data-toggle="js-toggle__btn">
+                    testing
+                </div>
+                <img src="/img/sample-1.jpg" />
             </div>
-            <img src="/img/sample-1.jpg" />
         </div>
-    </div>
-</DefaultLayout>;
+    </DefaultLayout>
+};
 
-render(HomePage(), document.body)
+
+render(<HomePage />, document.body);

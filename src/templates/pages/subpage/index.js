@@ -1,19 +1,23 @@
-import { render } from 'preact'
+import {render} from 'preact'
+import { useEffect } from 'preact/hooks';
 
 import DefaultLayout from '@layouts/default';
+import InitJS from '@javascript/index.js';
 import '@css/index.scss'
 
-export const title = 'Subpage';
+const Subpage = () => {
 
-// export const meta = [{
-//     name: 'description',
-//     content: ''
-// }];
+    useEffect(() => {
+        InitJS();
+    });
 
-const SubPage = () => <DefaultLayout>
-    <div class="wrap">
-        <h1>Hello world subpage.</h1>
-    </div>
-</DefaultLayout>;
+    return <DefaultLayout>
+        <div class="wrap">
+            <h1>Hello world subpage</h1>
+            <p><a href="/">Go to HOMEPAGE</a></p>
+        </div>
+    </DefaultLayout>
+};
 
-render(SubPage(), document.body)
+
+render(<Subpage />, document.body);

@@ -1,7 +1,6 @@
 import preact from "@preact/preset-vite";
 import path from 'path';
 
-console.log(path.join(process.cwd(), "src/assets"));
 export default {
     resolve: {
         alias: {
