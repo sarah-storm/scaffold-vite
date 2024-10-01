@@ -7,7 +7,6 @@
     "dev": "vite --config ./tools/vite/config/dev",
     "build": "vite build --config ./tools/vite/config/build",
     "ci": "vite build --config ./tools/vite/config/integration",
-    "preview": "vite preview",
     "start": "npm run dev"
   },
   "dependencies": {
