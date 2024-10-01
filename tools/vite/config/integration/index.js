@@ -1,10 +1,8 @@
-import { globSync } from "glob";
 import { defineConfig } from "vite";
 import { ciCleanup } from "../../plugins";
 import base from "../base";
 import path from 'path';
 import paths from "../../../../paths.config.js";
-import fs from "fs";
 
 export default defineConfig(({ command }) => {
 	return {
