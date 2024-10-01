@@ -8,4 +8,6 @@ const init = () => {
     initStack.map(fn => fn());
 }
 
+init();
+
 export default init;
