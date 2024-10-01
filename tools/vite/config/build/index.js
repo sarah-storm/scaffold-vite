@@ -1,5 +1,6 @@
-import { globSync } from 'glob';
 import { defineConfig } from 'vite';
+import { generateHtml } from "../../utils";
+import preact from "@preact/preset-vite";
 import base from '../base';
 import path from 'path';
 import paths from "../../../../paths.config.js";
