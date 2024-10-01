@@ -1,9 +1,9 @@
 import {render} from 'preact'
 import { useEffect } from 'preact/hooks';
-
-import DefaultLayout from '@layouts/default';
 import InitJS from '@javascript/index.js';
 import '@css/index.scss'
+
+import DefaultLayout from '@layouts/default';
 
 const Subpage = () => {
 
