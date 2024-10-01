@@ -1,5 +1,6 @@
 import { globSync } from "glob";
 import { defineConfig } from "vite";
+import { ciCleanup } from "../../plugins";
 import base from "../base";
 import path from 'path';
 import paths from "../../../../paths.config.js";
@@ -32,17 +33,7 @@ export default defineConfig(({ command }) => {
 			  },
 		},
 		plugins: [
-			{
-				name: "ci-cleanup",
-				writeBundle() {
-					if (command === "build") {
-						fs.unlink(`${paths.integrationOutput}/index.html`, (err) => {
-							if (err) throw err;
-							else console.log("Entry index file cleanup complete")
-						});
-					}
-				},
-			},
+			ciCleanup()
 		],
 	};
 });

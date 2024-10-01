@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
-import { generateHtml } from "../../utils";
+import { generateHtml } from "../../plugins";
 import preact from "@preact/preset-vite";
 import base from "../base"
 import dns from 'dns';
