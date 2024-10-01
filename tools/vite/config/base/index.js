@@ -1,19 +1,19 @@
 import preact from "@preact/preset-vite";
 import path from 'path';
+import paths from "../../../../paths.config.js";
 
 export default {
     resolve: {
         alias: {
-            "@javascript":path.join(process.cwd(), "src/js/"),
-            "@templates": path.join(process.cwd(), "src/templates/"),
-            "@layouts": path.join(process.cwd(), "src/templates/layouts"),
-            "@components": path.join(process.cwd(), "src/templates/components"),
-            "@css": path.join(process.cwd(), "src/css"),
+            "@javascript":path.join(process.cwd(), paths.src.js),
+            "@layouts": path.join(process.cwd(), paths.src.layouts),
+            "@components": path.join(process.cwd(), paths.src.components),
+            "@css": path.join(process.cwd(), paths.src.css),
         },
     },
     appType: 'mpa',
-    root: path.join(process.cwd(), "src/templates/pages"),
-    publicDir: path.join(process.cwd(), "src/assets"),
+    root: path.join(process.cwd(), paths.src.pages),
+    publicDir: path.join(process.cwd(), paths.src.assets),
     esbuild: {
       loader: 'jsx',
       include: /.*\.jsx?$/,
