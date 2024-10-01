@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import paths from '../../../paths.config'
+import paths from '../../../paths.config';
+import {HTMLTemplate} from '../templates';
 
 const findfiles = (dir, ext, fileList=[]) => {
     const files = fs.readdirSync(dir);
@@ -19,19 +20,7 @@ const findfiles = (dir, ext, fileList=[]) => {
 }
 
 const generateHtmlFile = (originalFilePath, outputPath) => {
-    const HTMLContent = `<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/img/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>${path.basename(originalFilePath)}</title>
-</head>
-<body>
-    <script type="module" src="./${path.basename(originalFilePath)}"></script>
-</body>
-</html>
-    `;
+    const HTMLContent = HTMLTemplate(originalFilePath);
 
     const directory = path.dirname(outputPath);
     if(!fs.existsSync(directory)) fs.mkdirSync(directory, {recursive: true});
