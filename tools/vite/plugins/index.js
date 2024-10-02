@@ -32,24 +32,22 @@ export const generateHtml = () => {
     return {
         name: 'vite-generate-html',
         config: (config, {command}) => {
-            if(command === 'build') {
-                const entryPoints = {};
-                const jsxFiles = findfiles(path.join(process.cwd(), paths.src.pages), 'jsx');
+            const entryPoints = {};
+            const jsxFiles = findfiles(path.join(process.cwd(), paths.src.pages), 'jsx');
 
-                jsxFiles.forEach((file) => {
-                    const fileName = path.basename(file, path.extname(file));
-                    const htmlPath = path.join(path.dirname(file), `${fileName}.html`);
-                    generateHtmlFile(file, htmlPath);
-                    const entryPath = path.join(path.relative(path.join(process.cwd(), paths.src.pages), path.dirname(file)), path.basename(file, path.extname(file))).replace("\\", "/");
-                    entryPoints[entryPath] = htmlPath;
-                });       
-                        
-                return {
-                    root: path.join(process.cwd(), paths.src.pages),
-                    build: {
-                        rollupOptions: {
-                            input: entryPoints
-                        }
+            jsxFiles.forEach((file) => {
+                const fileName = path.basename(file, path.extname(file));
+                const htmlPath = path.join(path.dirname(file), `${fileName}.html`);
+                generateHtmlFile(file, htmlPath);
+                const entryPath = path.join(path.relative(path.join(process.cwd(), paths.src.pages), path.dirname(file)), path.basename(file, path.extname(file))).replace("\\", "/");
+                entryPoints[entryPath] = htmlPath;
+            });       
+                    
+            return {
+                root: path.join(process.cwd(), paths.src.pages),
+                build: {
+                    rollupOptions: {
+                        input: entryPoints
                     }
                 }
             }
