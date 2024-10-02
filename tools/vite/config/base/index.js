@@ -5,6 +5,7 @@ import paths from "../../../../paths.config.js";
 export default {
     resolve: {
         alias: {
+            "@pages": path.join(process.cwd(), paths.src.pages),
             "@javascript":path.join(process.cwd(), paths.src.js),
             "@layouts": path.join(process.cwd(), paths.src.layouts),
             "@components": path.join(process.cwd(), paths.src.components),

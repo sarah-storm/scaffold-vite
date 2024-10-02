@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import paths from '../../../paths.config';
-import { HTMLTemplate } from '../templates';
+import { HTMLTemplate, JSTemplate } from '../templates';
 
 const findfiles = (dir, ext, fileList=[]) => {
     const files = fs.readdirSync(dir);
@@ -19,13 +19,15 @@ const findfiles = (dir, ext, fileList=[]) => {
     return fileList;
 }
 
-const generateHtmlFile = (originalFilePath, outputPath) => {
-    const HTMLContent = HTMLTemplate(originalFilePath);
+const generateFiles = (originalFilePath, originalFileName, outputPath) => {
+    const HTMLContent = HTMLTemplate(originalFileName);
+    const JSContent = JSTemplate(originalFilePath);
 
     const directory = path.dirname(outputPath);
     if(!fs.existsSync(directory)) fs.mkdirSync(directory, {recursive: true});
 
-    fs.writeFileSync(outputPath, HTMLContent);
+    fs.writeFileSync(outputPath+".html", HTMLContent);
+    fs.writeFileSync(outputPath+".js", JSContent);
 }
 
 export const generateHtml = () => {
@@ -33,15 +35,15 @@ export const generateHtml = () => {
         name: 'vite-generate-html',
         config: (config, {command}) => {
             const entryPoints = {};
-            const jsxFiles = findfiles(path.join(process.cwd(), paths.src.pages), 'jsx');
+            const jsFiles = findfiles(path.join(process.cwd(), paths.src.pages), 'js');
 
-            jsxFiles.forEach((file) => {
+            jsFiles.forEach((file) => {
                 const fileName = path.basename(file, path.extname(file));
                 const entryPath = path.join(path.relative(path.join(process.cwd(), paths.src.pages), path.dirname(file)), path.basename(file, path.extname(file))).replace("\\", "/");
 
-                const htmlPath = path.join(process.cwd(), "/.temp", path.join(path.relative(path.join(process.cwd(), paths.src.pages), path.dirname(file))), `${fileName}.html`);
+                const htmlPath = path.join(process.cwd(), "/.temp", path.join(path.relative(path.join(process.cwd(), paths.src.pages), path.dirname(file))), `${fileName}`);
 
-                generateHtmlFile(file, htmlPath);
+                generateFiles(entryPath+path.extname(file), fileName, htmlPath);
                 entryPoints[entryPath] = htmlPath;
             });      
                                 
@@ -55,7 +57,7 @@ export const generateHtml = () => {
             }
         },
         buildEnd: () => {
-            fs.rmSync(path.join(process.cwd(), "/.temp"), { recursive: true, force: true });
+            //fs.rmSync(path.join(process.cwd(), "/.temp"), { recursive: true, force: true });
         }
     }
 }
