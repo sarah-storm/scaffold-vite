@@ -28,8 +28,6 @@ const generateFiles = (originalFilePath, originalFileName, outputPath) => {
 
     fs.writeFileSync(outputPath+".html", HTMLContent);
     fs.writeFileSync(outputPath+".js", JSContent);
-
-
 }
 
 export const generateHtml = () => {
