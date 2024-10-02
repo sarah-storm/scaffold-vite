@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import paths from '../../../paths.config';
-import {HTMLTemplate} from '../templates';
+import { HTMLTemplate } from '../templates';
 
 const findfiles = (dir, ext, fileList=[]) => {
     const files = fs.readdirSync(dir);
@@ -40,9 +40,10 @@ export const generateHtml = () => {
                     const fileName = path.basename(file, path.extname(file));
                     const htmlPath = path.join(path.dirname(file), `${fileName}.html`);
                     generateHtmlFile(file, htmlPath);
-                    const entryPath = path.join(path.relative(path.join(process.cwd(), paths.src.pages), path.dirname(file)), path.basename(file, path.extname(file)));
+                    const entryPath = path.join(path.relative(path.join(process.cwd(), paths.src.pages), path.dirname(file)), path.basename(file, path.extname(file))).replace("\\", "/");
                     entryPoints[entryPath] = htmlPath;
-                });                
+                });       
+                        
                 return {
                     root: path.join(process.cwd(), paths.src.pages),
                     build: {
