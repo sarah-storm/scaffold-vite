@@ -1,4 +1,5 @@
 import path from 'path';
+import paths from '../../../paths.config';
 
 export const HTMLTemplate = (filePath) => {
     return `<!doctype html>
@@ -10,7 +11,7 @@ export const HTMLTemplate = (filePath) => {
     <title>${path.basename(filePath)}</title>
 </head>
 <body>
-    <script type="module" src="./${path.basename(filePath)}"></script>
+    <script type="module" src="${filePath}"></script>
 </body>
 </html>
     `

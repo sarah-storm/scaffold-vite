@@ -37,14 +37,16 @@ export const generateHtml = () => {
 
             jsxFiles.forEach((file) => {
                 const fileName = path.basename(file, path.extname(file));
-                const htmlPath = path.join(path.dirname(file), `${fileName}.html`);
-                generateHtmlFile(file, htmlPath);
                 const entryPath = path.join(path.relative(path.join(process.cwd(), paths.src.pages), path.dirname(file)), path.basename(file, path.extname(file))).replace("\\", "/");
+
+                const htmlPath = path.join(process.cwd(), "/.temp", path.join(path.relative(path.join(process.cwd(), paths.src.pages), path.dirname(file))), `${fileName}.html`);
+
+                generateHtmlFile(file, htmlPath);
                 entryPoints[entryPath] = htmlPath;
-            });       
-                    
+            });      
+                                
             return {
-                root: path.join(process.cwd(), paths.src.pages),
+                root: path.join(process.cwd(), "/.temp"),
                 build: {
                     rollupOptions: {
                         input: entryPoints
@@ -53,12 +55,7 @@ export const generateHtml = () => {
             }
         },
         buildEnd: () => {
-            const htmlFiles = findfiles(path.join(process.cwd(), paths.src.pages), 'html');
-            htmlFiles.forEach((file) => {
-                fs.unlink(file, (err) => {
-                    if (err) throw err;
-                });
-            });
+            fs.rmSync(path.join(process.cwd(), "/.temp"), { recursive: true, force: true });
         }
     }
 }

@@ -12,7 +12,6 @@ export default {
         },
     },
     appType: 'mpa',
-    root: path.join(process.cwd(), paths.src.pages),
     publicDir: path.join(process.cwd(), paths.src.assets),
     esbuild: {
       loader: 'jsx',

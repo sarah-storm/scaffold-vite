@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 /build
+/.temp
 /src/templates/pages/**/*.html
 
 # Editor directories and files
