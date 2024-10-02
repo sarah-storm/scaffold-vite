@@ -28,6 +28,8 @@ const generateFiles = (originalFilePath, originalFileName, outputPath) => {
 
     fs.writeFileSync(outputPath+".html", HTMLContent);
     fs.writeFileSync(outputPath+".js", JSContent);
+
+
 }
 
 export const generateHtml = () => {
@@ -44,9 +46,9 @@ export const generateHtml = () => {
                 const htmlPath = path.join(process.cwd(), "/.temp", path.join(path.relative(path.join(process.cwd(), paths.src.pages), path.dirname(file))), `${fileName}`);
 
                 generateFiles(entryPath+path.extname(file), fileName, htmlPath);
-                entryPoints[entryPath] = htmlPath;
-            });      
-                                
+                entryPoints[entryPath] = htmlPath+".html";
+            });    
+                                            
             return {
                 root: path.join(process.cwd(), "/.temp"),
                 build: {
