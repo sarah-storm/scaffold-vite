@@ -3,7 +3,7 @@ import path from 'path';
 import paths from '../../../paths.config';
 import { findfiles, generateFiles } from '../utilities';
 
-const tempFolder = "./temp";
+const tempFolder = "/.temp";
 
 export const generateHtml = () => {
     return {
