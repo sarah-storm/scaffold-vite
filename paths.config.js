@@ -1,6 +1,8 @@
 const source = 'src';
 const output = 'build';
 const integrationOutput = '../integration-output/static';
+const baseJS = '@javascript/index.js';
+const baseSCSS = '@css/index.scss';
 
 const src = {
     img: `${source}/img`,
@@ -16,4 +18,6 @@ export default {
     output,
     src,
     integrationOutput,
+    baseJS,
+    baseSCSS
 };

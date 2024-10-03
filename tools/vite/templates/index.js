@@ -1,4 +1,3 @@
-import path from 'path';
 import paths from '../../../paths.config';
 
 export const HTMLTemplate = (fileName) => {
@@ -21,8 +20,8 @@ export const JSTemplate = (filePath) => {
     return `
     import {render} from 'preact'
     import { useEffect } from 'preact/hooks';
-    import InitJS from '@javascript/index.js';
-    import '@css/index.scss'
+    import InitJS from '${paths.baseJS}';
+    import '${paths.baseSCSS}'
     import Component from "@pages/${filePath}";
 
     const TempComponent = () => {

@@ -3,6 +3,8 @@ import path from 'path';
 import paths from '../../../paths.config';
 import { findfiles, generateFiles } from '../utilities';
 
+const tempFolder = "./temp";
+
 export const generateHtml = () => {
     return {
         name: 'vite-generate-html',
@@ -15,14 +17,14 @@ export const generateHtml = () => {
 
                 const entryPath = path.join(path.relative(path.join(process.cwd(), paths.src.pages), path.dirname(file)), path.basename(file, path.extname(file))).replace("\\", "/");
 
-                const htmlPath = path.join(process.cwd(), "/.temp", path.join(path.relative(path.join(process.cwd(), paths.src.pages), path.dirname(file))), `${fileName}`);
+                const htmlPath = path.join(process.cwd(), tempFolder, path.join(path.relative(path.join(process.cwd(), paths.src.pages), path.dirname(file))), `${fileName}`);
 
                 generateFiles(entryPath+path.extname(file), fileName, htmlPath);
                 entryPoints[entryPath] = htmlPath+".html";
             });    
                                             
             return {
-                root: path.join(process.cwd(), "/.temp"),
+                root: path.join(process.cwd(), tempFolder),
                 build: {
                     rollupOptions: {
                         input: entryPoints
@@ -41,7 +43,7 @@ export const devCleanup = () => {
             process.stdin.resume(); 
         
             function exitHandler(options, exitCode) {
-                fs.rmSync(path.join(process.cwd(), "/.temp"), { recursive: true, force: true });
+                fs.rmSync(path.join(process.cwd(), tempFolder), { recursive: true, force: true });
                 process.exit();
             }
             process.on('exit', exitHandler);
@@ -57,7 +59,7 @@ export const buildCleanup = () => {
     return {
         name: 'vite-build-cleanup',
         buildEnd: () => {
-            fs.rmSync(path.join(process.cwd(), "/.temp"), { recursive: true, force: true });
+            fs.rmSync(path.join(process.cwd(), tempFolder), { recursive: true, force: true });
         }
     }
 }
