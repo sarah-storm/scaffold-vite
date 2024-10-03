@@ -1,13 +1,13 @@
 import paths from '../../../paths.config';
 
-export const HTMLTemplate = (fileName) => {
+export const HTMLTemplate = (fileName, title, meta) => {
     return `<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/img/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>fileName</title>
+    <title>${title}</title>
 </head>
 <body>
     <script type="module" src="./${fileName}.js"></script>
@@ -22,16 +22,20 @@ export const JSTemplate = (filePath) => {
     import { useEffect } from 'preact/hooks';
     import InitJS from '${paths.baseJS}';
     import '${paths.baseSCSS}'
-    import Component from "@pages/${filePath}";
 
-    const TempComponent = () => {
-        
+    const pageScript = await import("@pages/${filePath}");
+    const Component = pageScript.default;
+    const title = pageScript.title ;
+
+    const TempComponent = () => { 
         useEffect(() => {
             InitJS();
+            if(title) document.title = title;
         });
-    
-        return <Component />;
+        if(Component) return <Component />;
     }
+
     render(<TempComponent />, document.body);
+ 
 `;
 }
