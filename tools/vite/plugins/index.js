@@ -1,34 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import paths from '../../../paths.config';
-import { HTMLTemplate, JSTemplate } from '../templates';
-
-const findfiles = (dir, ext, fileList=[]) => {
-    const files = fs.readdirSync(dir);
-    files.forEach((file) => {
-        const filePath = path.join(dir, file);
-        const stat = fs.statSync(filePath);
-
-        if(stat.isDirectory()) {
-            findfiles(filePath, ext, fileList)
-        } else if(file.endsWith('.'+ext)) {
-            fileList.push(filePath);
-        }
-    });
-
-    return fileList;
-}
-
-const generateFiles = (originalFilePath, originalFileName, outputPath) => {
-    const HTMLContent = HTMLTemplate(originalFileName);
-    const JSContent = JSTemplate(originalFilePath);
-
-    const directory = path.dirname(outputPath);
-    if(!fs.existsSync(directory)) fs.mkdirSync(directory, {recursive: true});
-
-    fs.writeFileSync(outputPath+".html", HTMLContent);
-    fs.writeFileSync(outputPath+".js", JSContent);
-}
+import { findfiles, generateFiles } from '../utilities';
 
 export const generateHtml = () => {
     return {
@@ -39,6 +12,7 @@ export const generateHtml = () => {
 
             jsFiles.forEach((file) => {
                 const fileName = path.basename(file, path.extname(file));
+
                 const entryPath = path.join(path.relative(path.join(process.cwd(), paths.src.pages), path.dirname(file)), path.basename(file, path.extname(file))).replace("\\", "/");
 
                 const htmlPath = path.join(process.cwd(), "/.temp", path.join(path.relative(path.join(process.cwd(), paths.src.pages), path.dirname(file))), `${fileName}`);
@@ -56,8 +30,34 @@ export const generateHtml = () => {
                 }
             }
         },
+        
+    }
+}
+
+export const devCleanup = () => {
+    return {
+        name: 'vite-dev-cleanup',
+        config: (config, {command}) => {
+            process.stdin.resume(); 
+        
+            function exitHandler(options, exitCode) {
+                fs.rmSync(path.join(process.cwd(), "/.temp"), { recursive: true, force: true });
+                process.exit();
+            }
+            process.on('exit', exitHandler);
+            process.on('SIGINT', exitHandler);
+            process.on('SIGUSR1', exitHandler);
+            process.on('SIGUSR2', exitHandler);
+            process.on('uncaughtException', exitHandler);
+        }
+    }
+}
+
+export const buildCleanup = () => {
+    return {
+        name: 'vite-build-cleanup',
         buildEnd: () => {
-            //fs.rmSync(path.join(process.cwd(), "/.temp"), { recursive: true, force: true });
+            fs.rmSync(path.join(process.cwd(), "/.temp"), { recursive: true, force: true });
         }
     }
 }

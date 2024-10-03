@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import { generateHtml } from "../../plugins";
+import { generateHtml, buildCleanup } from "../../plugins";
 import preact from "@preact/preset-vite";
 import base from '../base';
 import path from 'path';
@@ -9,7 +9,8 @@ export default defineConfig({
     ...base,
     plugins: [
         preact(),
-        generateHtml()
+        generateHtml(),
+        buildCleanup()
     ],
     build: {
         outDir: path.join(process.cwd(), paths.output),
