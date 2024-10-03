@@ -1,13 +1,13 @@
 import paths from '../../../paths.config';
 
-export const HTMLTemplate = (fileName, title, meta) => {
+export const HTMLTemplate = (fileName) => {
     return `<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/img/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>${title}</title>
+    <title></title>
 </head>
 <body>
     <script type="module" src="./${fileName}.js"></script>
@@ -21,7 +21,7 @@ export const JSTemplate = (filePath) => {
     import {render} from 'preact'
     import { useEffect } from 'preact/hooks';
     import InitJS from '${paths.baseJS}';
-    import '${paths.baseSCSS}'
+    import '${paths.baseSCSS}';
 
     const pageScript = await import("@pages/${filePath}");
     const Component = pageScript.default;

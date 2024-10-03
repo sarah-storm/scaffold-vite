@@ -18,9 +18,16 @@ export const findfiles = (dir, ext, fileList=[]) => {
     return fileList;
 }
 
-export const generateFiles = (originalFilePath, originalFileName, outputPath) => {
+export const generateFiles = async (fullFilePath, relativeFilePath, originalFileName, outputPath) => {
     const HTMLContent = HTMLTemplate(originalFileName);
-    const JSContent = JSTemplate(originalFilePath);
+    const JSContent = JSTemplate(relativeFilePath);
+
+    try{
+        console.log(fullFilePath);
+        const module = await import("file://" + fullFilePath);
+    } catch (err) {
+        console.log(err);
+    }
 
     const directory = path.dirname(outputPath);
     if(!fs.existsSync(directory)) fs.mkdirSync(directory, {recursive: true});

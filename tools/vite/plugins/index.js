@@ -19,7 +19,7 @@ export const generateHtml = () => {
 
                 const htmlPath = path.join(process.cwd(), tempFolder, path.join(path.relative(path.join(process.cwd(), paths.src.pages), path.dirname(file))), `${fileName}`);
 
-                generateFiles(entryPath+path.extname(file), fileName, htmlPath);
+                generateFiles(file, entryPath+path.extname(file), fileName, htmlPath);
                 entryPoints[entryPath] = htmlPath+".html";
             });    
                                             
