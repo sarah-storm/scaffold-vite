@@ -1,13 +1,17 @@
 import paths from '../../../paths.config';
 
-export const HTMLTemplate = (fileName) => {
+export const HTMLTemplate = (fileName, title, meta) => {
     return `<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/img/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
+    ${meta && meta.map(item => {
+        if (item.name) return `<meta name="${item.name}" content="${item.content}" />`;
+        if (item.property) return `<meta property="${item.property}" content="${item.content}" />`;
+    })}
+    <title>${title}</title>
 </head>
 <body>
     <script type="module" src="./${fileName}.js"></script>
@@ -30,7 +34,6 @@ export const JSTemplate = (filePath) => {
     const TempComponent = () => { 
         useEffect(() => {
             InitJS();
-            if(title) document.title = title;
         });
         if(Component) return <Component />;
     }

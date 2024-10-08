@@ -15,5 +15,6 @@ export default defineConfig({
     build: {
         outDir: path.join(process.cwd(), paths.output),
         emptyOutDir: true,    
+        target: "ES2022"
     }
 });
